@@ -1,0 +1,10 @@
+{
+  "name": "textanalytics-botframework-middleware",
+  "version": "1.0.0",
+  "description": "A Node module to facilitate the usage of the textanalytics Node module under the Microsoft Bot Framework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT"
+}
