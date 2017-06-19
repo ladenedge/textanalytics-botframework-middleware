@@ -4,7 +4,15 @@
   "description": "A Node module to facilitate the usage of the textanalytics Node module under the Microsoft Bot Framework.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "local-test": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "coveralls": "^2.13.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.2",
+    "mocha-lcov-reporter": "^1.3.0",
+    "sinon": "^2.3.4"
+  }
 }
