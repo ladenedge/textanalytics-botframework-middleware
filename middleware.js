@@ -1,4 +1,4 @@
-var TextAnalytics = require('textanalytics')
+var TextAnalytics = require('../textanalytics/textanalytics.js')
 
 /**
  * Module for the Text analytics that creates a Bot Framework-friendly interface
@@ -12,7 +12,6 @@ var TextAnalytics = require('textanalytics')
  * @param {string} config.apikey Full api key for the Text Analytics API
  */
 var textanalytics_botframework_middleware = function (config) {
-	var textanalytics = new TextAnalytics(config);
 	var receive = function (event, next) {
 		if (!event || event === null) {
 			next();
@@ -27,19 +26,37 @@ var textanalytics_botframework_middleware = function (config) {
 			next();
 		}
 		else {
-			textanalytics.analyze(event.message.text, 
-				function (error,resp) {
-					if(error){
-						console.log(error);
+			var response_summary = '';
+			const endpoint = config.endpoint;
+			['/languages', '/keyPhrases', '/sentiment'].forEach(function (item) {
+				config.endpoint = endpoint+item;
+				var textanalytics = new TextAnalytics(config);
+				textanalytics.analyze(event.message.text,
+					function (error, resp) {
+						if (error) {
+							console.log(error);
+						}
+						else {
+							if (resp.documents[0].score) {
+								console.log(`Sentiment: ${resp.documents[0].score}; `);
+							}
+							else if (resp.documents[0].keyPhrases) {
+								console.log(`Key Phrases: ${resp.documents[0].keyPhrases}; `);
+							}
+							else {
+								console.log(`Detected Languages: ${resp.documents[0].detectedLanguages[0]}; `);
+							}
+
+							
+						}
+
 					}
-					else{						
-						var response_summary = `Sentiment score: ${resp[0][0].score}, /n Detected language: ${resp[1][0].detectedLanguages}, /n Key phrases: ${resp[2][0].keyPhrases}`;
-						console.log(response_summary);
-						next();
-					}
-						
-				}
-			)};
+				)
+			}
+			)
+  		next();
+		};
+			
 
 	}
 	return receive;
