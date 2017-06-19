@@ -45,4 +45,4 @@ var textanalytics_botframework_middleware = function (config) {
 	return receive;
 }
 
-module.export = textanalytics_botframework_middleware;
+module.exports = textanalytics_botframework_middleware;
