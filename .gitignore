@@ -50,3 +50,4 @@ Temporary Items
 .vs
 node_modules
 testlocal.js
+coverage/

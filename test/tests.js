@@ -11,5 +11,9 @@ describe('Recieve', function () {
     afterEach(function () {
         request.post.restore();
     });
+    var config = { endpoint: 'foo', apikey: 'bar' };
+    it('should export a function', function () {        
+        assert.equal(typeof TextAnalytic(config), 'function');
+    });
 
 })
