@@ -1,4 +1,4 @@
-var TextAnalytics = require('../textanalytics/textanalytics.js')
+var TextAnalytics = require('textanalytics')
 
 /**
  * Module for the Text analytics that creates a Bot Framework-friendly interface
