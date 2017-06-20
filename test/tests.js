@@ -1,4 +1,4 @@
-var TextAnalytic = require('../middleware.js');
+var TextAnalytic = require('textanalytics');
 var assert = require('assert');
 var sinon = require('sinon');
 var request = require('request');
@@ -13,10 +13,10 @@ describe('Recieve', function () {
     });
     var config = { endpoint: 'foo', apikey: 'bar' };
     it('should export a function', function () {        
-        assert.equal(typeof TextAnalytic(config), 'function');
+        assert.equal(typeof new TextAnalytic(config, (err,rsp) => { }), 'function');
     });
 
     it('should call next when event is null', function(){
-        assert.equal(TextAnalytic(config)(null, function () { return 'test'; }), 'test');
+        assert.equal(new TextAnalytic(config, (err, rsp) => { })(null, function () { return 'test'; }), 'test');
     });
 })

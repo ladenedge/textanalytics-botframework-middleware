@@ -8,8 +8,12 @@
     "Jay Miller <jmiller@contactsolutions.com>"
   ],
   "scripts": {
+    "deploy-prod": "npm run local-test && npm run version-patch && npm run push-tags",
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "local-test": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec"
+    "local-test": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec",
+    "version-patch": "npm version patch",
+    "push-tags": "git push --tags",
+    "doc": "jsdoc index.js && jsdoc2md index.js > out\\wiki.md"
   },
   "license": "MIT",
   "devDependencies": {
@@ -20,7 +24,7 @@
     "sinon": "^2.3.4"
   },
   "dependencies": {
-    "textanalytics": "^1.0.5"
+    "textanalytics": "^1.0.7"
   },
   "directories": {
     "test": "test"
