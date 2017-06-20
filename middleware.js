@@ -1,4 +1,4 @@
-var TextAnalytics = require('textanalytics')
+var TextAnalytics = require('textanalytics');
 
 /**
  * Module for the Text analytics that creates a Bot Framework-friendly interface
@@ -38,23 +38,22 @@ var textanalytics_botframework_middleware = function (config) {
 						}
 						else {
 							if (resp.documents[0].score) {
-								console.log(`Sentiment: ${resp.documents[0].score}; `);
+							    response_summary += `Sentiment: ${resp.documents[0].score}; `;
+							    console.log(response_summary);
+							    next();
 							}
 							else if (resp.documents[0].keyPhrases) {
-								console.log(`Key Phrases: ${resp.documents[0].keyPhrases}; `);
+								response_summary += `Key Phrases: ${resp.documents[0].keyPhrases}; `;
 							}
 							else {
-								console.log(`Detected Languages: ${resp.documents[0].detectedLanguages[0]}; `);
-							}
-
-							
+								response_summary += `Detected Languages: ${resp.documents[0].detectedLanguages[0]}; `;
+							}						
 						}
 
 					}
 				)
 			}
 			)
-  		next();
 		};
 			
 
