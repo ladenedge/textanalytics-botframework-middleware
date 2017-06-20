@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "A Node module to facilitate the usage of the textanalytics Node module under the Microsoft Bot Framework.",
   "main": "index.js",
+  "author": {
+    "name" : "Jackson Adler",
+    "email" : "jadler@contactsolutions.com"
+  },
+  "contributors": [{
+    "name" : "Jay Miller",
+    "email" : "jmiller@contactsolutions.com"
+  }],
   "scripts": {
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "local-test": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec"
