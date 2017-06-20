@@ -16,4 +16,7 @@ describe('Recieve', function () {
         assert.equal(typeof TextAnalytic(config), 'function');
     });
 
+    it('should call next when event is null', function(){
+        assert.equal(TextAnalytic(config)(null, function () { return 'test'; }), 'test');
+    });
 })
