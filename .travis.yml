@@ -6,7 +6,7 @@ cache:
   - node_modules
 deploy:
   provider: npm
-  email: 
+  email: jnmiller@cryptofreak.org
   api_key:
     secure: h2a1uNdOr+hPxlYceJ6PAZbbMLEdGOXP/YluX1W60/RIqrXFQDQJ0bgwh6Vdr5dYoPhnPYH7ug/p9q2PdIBCsvjMvk1GBFUgERx+syq2rot4y3nzsDc2an7jSQP2AO9KbYueA/mWHhgIt0frsh5Al5NDatH8vtTuhifFoaOeKqMm29/HmYju64crQwXNHJTOq7ulP3JXthr05npQyMs2vVXo8OHxaK6OcH6qsMsysXmSDzhvmWM2ba6d9PRm4dzRXzm81503VRYWk//1ilAzkE7YuvMref7C9Mbiot/uYj7a/EpMsvKboS0YtWWW0/u8u5nybeCtcnG1lnQT5gAVLD6KCTVAqq6xT63Sjr6cstKjpVwVXTL1B3i8W2DTmB0SrE5/+C58JLb5MsLbxoJkckUiRK7w9H55p3ubmWqfqa499xEOwDP7TtqQwHw6uFZSj6sx2zFxgW7+U16BUvAII64B3eKNIjLaxgMLI47utNydPSBB5mfvTdCYXlcx2q43Yv25WpwnZ/TwAP+ljn1wEqJtzIPyxiv6waW7VoA54ijH4WpN1odWycliXnZKzjxhb/x8UFKWv1rExbNg+DYEN8mJax/KoHvdRzv2cvKwiOFNrsEexoiLc6mgYNlWRMn6S9ibmyYn//Cvyew+tAmiq12vfDsoCvE98yD6p7u/Ap8=
   on:
