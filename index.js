@@ -20,16 +20,16 @@ var TextAnalytics = require('textanalytics');
 var textanalytics_botframework_middleware = function (config, callback) {
     var receive = function (event, next) {
         if (!event || event === null) {
-            next();
+            return next();         
         }
         else if (!event.message || event.message === null) {
-            next();
+            return next();
         }
         else if (!event.message.text || event.message.text === null) {
-            next();
+            return next();
         }
         else if (event.message.text.trim() === '') {
-            next();
+            return next();
         }
         else {
             var response_summary = '';
@@ -41,7 +41,7 @@ var textanalytics_botframework_middleware = function (config, callback) {
                 else {
                     response_summary += `Sentiment score: ${resp.sentiment.documents[0].score}, Languages: ${resp.languages.documents[0].detectedLanguages[0].name}, Key Phrases: ${resp.keyPhrases.documents[0].keyPhrases}`;
                     callback(null, response_summary);
-                    next();
+                    return next();
                 }
             });
         };
