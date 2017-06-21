@@ -39,7 +39,7 @@ var textanalytics_botframework_middleware = function (config, callback) {
                     callback(error);
                 }
                 else {
-                    response_summary += `Sentiment score: ${resp.sentiment}, Languages: ${resp.languages}, Key Phrases: ${resp.keyPhrases}`;
+                    response_summary += `Sentiment score: ${resp.sentiment.documents[0].score}, Languages: ${resp.languages.documents[0].detectedLanguages[0].name}, Key Phrases: ${resp.keyPhrases.documents[0].keyPhrases}`;
                     callback(null, response_summary);
                     next();
                 }
