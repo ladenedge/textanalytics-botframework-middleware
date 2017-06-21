@@ -18,35 +18,35 @@ var TextAnalytics = require('textanalytics');
  * @param {function} callback A response handler for when the function completes
  */
 var textanalytics_botframework_middleware = function (config, callback) {
-    var receive = function (event, next) {
-        if (!event || event === null) {
-            return next();         
+    return {
+        receive: function (event, next) {
+            if (!event || event === null) {
+                return next();
+            }
+            else if (!event.message || event.message === null) {
+                return next();
+            }
+            else if (!event.message.text || event.message.text === null) {
+                return next();
+            }
+            else if (event.message.text.trim() === '') {
+                return next();
+            }
+            else {               
+                var textanalytics = new TextAnalytics(config);
+                textanalytics.analyze(event.message.text, function (error, resp) {
+                    if (error) {
+                        callback(error);
+                    }
+                    else {
+                        var response_summary = { sentiment: resp.sentiment, languages: resp.languages, keyPhrases: resp.keyPhrases };
+                        callback(null, response_summary);
+                        return next();
+                    }
+                });
+            };
         }
-        else if (!event.message || event.message === null) {
-            return next();
-        }
-        else if (!event.message.text || event.message.text === null) {
-            return next();
-        }
-        else if (event.message.text.trim() === '') {
-            return next();
-        }
-        else {
-            var response_summary = '';
-            var textanalytics = new TextAnalytics(config);
-            textanalytics.analyze(event.message.text, function (error, resp) {
-                if (error) {
-                    callback(error);
-                }
-                else {
-                    response_summary += `Sentiment score: ${resp.sentiment.documents[0].score}, Languages: ${resp.languages.documents[0].detectedLanguages[0].name}, Key Phrases: ${resp.keyPhrases.documents[0].keyPhrases}`;
-                    callback(null, response_summary);
-                    return next();
-                }
-            });
-        };
-    }
-    return receive;
+    };
 }
 
 module.exports = textanalytics_botframework_middleware;
