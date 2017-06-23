@@ -20,7 +20,6 @@ The function takes a config object as arguments and returns a recieve function.
 ##Full Example
 
 	var config = {
-		endpoint: process.env.TEXTANALYTICS_ENDPOINT,
 		apikey: process.env.TEXTANALYTICS_APIKEY,
 	};
 
