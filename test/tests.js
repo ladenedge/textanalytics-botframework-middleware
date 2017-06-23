@@ -13,36 +13,52 @@ describe('Recieve', function () {
     });
     var config = { apikey: 'foo' };
     it('should export a object', function () {
-        assert.equal(typeof TextAnalytic(config, (err, rsp) => { }), 'object');
+        var ta = TextAnalytic(config, (err, rsp) => { });
+        var actual = typeof ta;
+        assert.equal(actual, 'object');
     });
 
     it('should export an object with a receive function', function () {
-        assert.equal(typeof TextAnalytic(config, (err, rsp) => { }).receive, 'function');
+        var ta = TextAnalytic(config, (err, rsp) => { })
+        var actual = typeof ta.receive;
+        assert.equal(actual, 'function');
     });
 
 
     it('should call next() if event is null', function () {
-        assert.equal(TextAnalytic(config, (err, rsp) => { }).receive(null, () => { return 2; }), 2);
+        var ta = TextAnalytic(config, (err, rsp) => { });
+        var actual = ta.receive(null, () => { return 2; });
+        assert.equal(actual, 2);
     }
     );
 
     it('should call next() if event.message is undefined', function () {
-        assert.equal(TextAnalytic(config, (err, rsp) => { }).receive({}, () => { return 2; }), 2)
+        var ta = TextAnalytic(config, (err, rsp) => { });
+        var actual = ta.receive({}, () => { return 2; });
+        assert.equal(actual, 2);
     });
 
     it('should call next() if event.message is null', function () {
-        assert.equal(TextAnalytic(config, (err, rsp) => { }).receive({ message: null }, () => { return 2; }), 2)
+        var ta = TextAnalytic(config, (err, rsp) => { });
+        var actual = ta.receive({ message: null }, () => { return 2; });
+        assert.equal(actual, 2);
     });
 
     it('should call next() if event.message.text is undefined', function () {
-        assert.equal(TextAnalytic(config, (err, rsp) => { }).receive({ message: {} }, () => { return 2; }), 2)
+        var ta = TextAnalytic(config, (err, rsp) => { });
+        var actual = ta.recieve({ message: {} }, () => { return 2; });
+        assert.equal(actual, 2);
     });
 
     it('should call next() if event.message.text is null', function () {
-        assert.equal(TextAnalytic(config, (err, rsp) => { }).receive({ message: {text:null} }, () => { return 2; }), 2)
+        var ta = TextAnalytic(config, (err, rsp) => { });
+        var actual = ta.receive({ message: { text: null } }, () => { return 2; });
+        assert.equal(actual, 2);
     });
 
     it('should call next() if event.message.text is entirely whitespace', function () {
-        assert.equal(TextAnalytic(config, (err, rsp) => { }).receive({ message: { text: '  ' } }, () => { return 2; }), 2)
+        var ta = TextAnalytic(config, (err, rsp) => { });
+        var actual = ta.receive({ message: { text: '  ' } }, () => { return 2; });
+        assert.equal(actual, 2);
     });
 })
