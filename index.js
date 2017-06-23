@@ -21,16 +21,16 @@ var textanalytics_botframework_middleware = function (config, callback) {
     return {
         receive: function (event, next) {
             if (!event || event === null) {
-                return next();
+                next();
             }
             else if (!event.message || event.message === null) {
-                return next();
+                next();
             }
             else if (!event.message.text || event.message.text === null) {
-                return next();
+                next();
             }
             else if (event.message.text.trim() === '') {
-                return next();
+                next();
             }
             else {               
                 var textanalytics = new TextAnalytics(config);
@@ -41,7 +41,7 @@ var textanalytics_botframework_middleware = function (config, callback) {
                     else {
                         var response_summary = { sentiment: resp.sentiment, languages: resp.languages, keyPhrases: resp.keyPhrases };
                         callback(null, response_summary);
-                        return next();
+                        next();
                     }
                 });
             };

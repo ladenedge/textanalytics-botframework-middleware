@@ -2,14 +2,17 @@ var TextAnalytic = require('../index.js');
 var assert = require('assert');
 var sinon = require('sinon');
 var request = require('request');
+var next = '';
 
 describe('Recieve', function () {
     beforeEach(function () {
         //A Sinon stub replaces the target function, so no need for DI
         this.post = sinon.stub(request, 'post');
+        next = sinon.spy();
     });
     afterEach(function () {
         request.post.restore();
+        next.reset();
     });
     var config = { apikey: 'foo' };
     it('should export a object', function () {
@@ -27,38 +30,38 @@ describe('Recieve', function () {
 
     it('should call next() if event is null', function () {
         var ta = TextAnalytic(config, (err, rsp) => { });
-        var actual = ta.receive(null, () => { return 2; });
-        assert.equal(actual, 2);
+        ta.receive(null, next);
+        assert(next.called);
     }
     );
 
     it('should call next() if event.message is undefined', function () {
         var ta = TextAnalytic(config, (err, rsp) => { });
-        var actual = ta.receive({}, () => { return 2; });
-        assert.equal(actual, 2);
+        ta.receive({}, next);
+        assert(next.called);
     });
 
     it('should call next() if event.message is null', function () {
         var ta = TextAnalytic(config, (err, rsp) => { });
-        var actual = ta.receive({ message: null }, () => { return 2; });
-        assert.equal(actual, 2);
+        var actual = ta.receive({ message: null }, next);
+        assert(next.called);
     });
 
     it('should call next() if event.message.text is undefined', function () {
         var ta = TextAnalytic(config, (err, rsp) => { });
-        var actual = ta.recieve({ message: {} }, () => { return 2; });
-        assert.equal(actual, 2);
+        var actual = ta.receive({ message: {} }, next);
+        assert(next.called);
     });
 
     it('should call next() if event.message.text is null', function () {
         var ta = TextAnalytic(config, (err, rsp) => { });
-        var actual = ta.receive({ message: { text: null } }, () => { return 2; });
-        assert.equal(actual, 2);
+        var actual = ta.receive({ message: { text: null } }, next);
+        assert(next.called);
     });
 
     it('should call next() if event.message.text is entirely whitespace', function () {
         var ta = TextAnalytic(config, (err, rsp) => { });
-        var actual = ta.receive({ message: { text: '  ' } }, () => { return 2; });
-        assert.equal(actual, 2);
+        var actual = ta.receive({ message: { text: '  ' } }, next);
+        assert(next.called);
     });
 })
