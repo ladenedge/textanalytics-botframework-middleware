@@ -52,3 +52,4 @@ node_modules
 testlocal.js
 coverage/
 npm-debug.log
+*.user
