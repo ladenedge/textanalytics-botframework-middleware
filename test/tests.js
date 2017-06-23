@@ -57,4 +57,13 @@ describe('Recieve', function () {
         }).receive;
         receive({ message: { text: 'Hello' } }, () => {});
     });
+
+    it('should pass along the response summary if no error occurs', function (done) {
+        this.analyze.callsArgWith(1, null, { sentiment: 1, languages: 2, keyPhrases: 3 });
+        var receive = TextAnalytic(config, (err, rsp) => {
+            assert.equal(rsp.sentiment, 1);
+            done();
+        }).receive;
+        receive({ message: { text: 'Hello' } }, () => { });
+    });
 })
