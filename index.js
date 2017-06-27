@@ -23,18 +23,15 @@ var textanalytics_botframework_middleware = function (config, callback) {
             if (!event || event === null) {
                 next();
             }
-            else if (!event.message || event.message === null) {
+            else if (!event.text || event.text === null) {
                 next();
             }
-            else if (!event.message.text || event.message.text === null) {
-                next();
-            }
-            else if (event.message.text.trim() === '') {
+            else if (event.text.trim() === '') {
                 next();
             }
             else {               
                 var textanalytics = new TextAnalytics(config);
-                textanalytics.analyze(event.message.text, function (error, resp) {
+                textanalytics.analyze(event.text, function (error, resp) {
                     if (error) {
                         callback(error);
                     }

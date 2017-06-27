@@ -1,0 +1,2 @@
+C:\Users\jadler\Documents\GitHub\textanalytics-botframework-middleware\obj\Debug\textanalytics-botframework-middleware.njsprojResolveAssemblyReference.cache
+C:\Users\jadler\Documents\GitHub\textanalytics-botframework-middleware\bin\Microsoft.NodejsTools.WebRole.dll

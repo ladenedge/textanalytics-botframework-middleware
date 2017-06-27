@@ -35,33 +35,22 @@ describe('Recieve', function () {
     }
     );
 
-    it('should call next() if event.message is undefined', function () {
+
+    it('should call next() if event.text is undefined', function () {
         var ta = middleware(config, (err, rsp) => { });
-        ta.receive({}, next);
+        var actual = ta.receive({}, next);
         assert(next.called);
     });
 
-    it('should call next() if event.message is null', function () {
+    it('should call next() if event.text is null', function () {
         var ta = middleware(config, (err, rsp) => { });
-        var actual = ta.receive({ message: null }, next);
+        var actual = ta.receive({ text: null }, next);
         assert(next.called);
     });
 
-    it('should call next() if event.message.text is undefined', function () {
+    it('should call next() if event.text is entirely whitespace', function () {
         var ta = middleware(config, (err, rsp) => { });
-        var actual = ta.receive({ message: {} }, next);
-        assert(next.called);
-    });
-
-    it('should call next() if event.message.text is null', function () {
-        var ta = middleware(config, (err, rsp) => { });
-        var actual = ta.receive({ message: { text: null } }, next);
-        assert(next.called);
-    });
-
-    it('should call next() if event.message.text is entirely whitespace', function () {
-        var ta = middleware(config, (err, rsp) => { });
-        var actual = ta.receive({ message: { text: '  ' } }, next);
+        var actual = ta.receive({ text: '  ' }, next);
         assert(next.called);
     });
 
@@ -71,7 +60,7 @@ describe('Recieve', function () {
             assert.equal(err.message, 'Test Error');
             done();
         }).receive;
-        receive({ message: { text: 'Hello' } }, () => { });
+        receive({ text: 'Hello' }, () => { });
     });
 
     it('should pass along the response summary if no error occurs', function (done) {
@@ -80,6 +69,6 @@ describe('Recieve', function () {
             assert.equal(rsp.sentiment, 1);
             done();
         }).receive;
-        receive({ message: { text: 'Hello' } }, () => { });
+        receive({  text: 'Hello' }, () => { });
     });
 })
