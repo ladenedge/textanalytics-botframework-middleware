@@ -1,10 +1,18 @@
 {
   "name": "textanalytics-botframework-middleware",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Node module to facilitate the usage of the textanalytics Node module under the Microsoft Bot Framework.",
   "main": "index.js",
+  "author": "Jackson Adler <jadler@contactsolutions.com",
+  "contributors": [
+    "Jay Miller <jmiller@contactsolutions.com"
+  ],
   "scripts": {
+    "deploy-prod": "npm run local-test && npm run version-patch && npm run push-tags",
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "version-patch": "npm version patch",
+    "push-tags": "git push --tags",
+    "doc": "jsdoc index.js && jsdoc2md index.js > out\\wiki.md",
     "local-test": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec"
   },
   "license": "MIT",
@@ -16,6 +24,17 @@
     "sinon": "^2.3.4"
   },
   "dependencies": {
-    "textanalytics": "^1.0.3"
-  }
+    "textanalytics": "^1.0.7"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+http://github.com/ladenedge/textanalytics-botframework-middleware.git"
+  },
+  "bugs": {
+    "url": "https://gitub/com/ladenedge/textanalyticss-botframework-middleware/issues"
+  },
+  "homepage": "https://github.com/ladenedge/textanalytics-botframework-middleware#readme"
 }
