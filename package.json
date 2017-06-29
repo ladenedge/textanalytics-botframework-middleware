@@ -24,7 +24,7 @@
     "sinon": "^2.3.4"
   },
   "dependencies": {
-    "textanalytics": "^1.0.7"
+    "textanalytics": "^1.0.8"
   },
   "directories": {
     "test": "test"
