@@ -33,7 +33,7 @@
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="middleware.js" />
+    <Compile Include="index.js" />
     <Compile Include="test\tests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
