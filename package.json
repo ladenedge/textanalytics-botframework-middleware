@@ -1,6 +1,6 @@
 {
   "name": "textanalytics-botframework-middleware",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Node module to facilitate the usage of the textanalytics Node module under the Microsoft Bot Framework.",
   "main": "index.js",
   "author": "Jackson Adler <jadler@contactsolutions.com",
