@@ -19,19 +19,22 @@ var TextAnalytics = require('textanalytics');
  */
 var textanalytics_botframework_middleware = function (config, callback) {
     return {
-        receive: function (event, next) {
-            if (!event || event === null) {
+        botbuilder: function (session, next) {
+            if (!session || session === null) {
                 next();
             }
-            else if (!event.text || event.text === null) {
+            else if (!session.message || session.message === null) {
                 next();
             }
-            else if (event.text.trim() === '') {
+            else if (!session.message.text || session.message.text === null) {
+                next();
+            }
+            else if (session.message.text.trim() === '') {
                 next();
             }
             else {               
                 var textanalytics = new TextAnalytics(config);
-                textanalytics.analyze(event.text, function (error, resp) {
+                textanalytics.analyze(session.message.text, function (error, resp) {
                     if (error) {
                         callback(error);
                     }

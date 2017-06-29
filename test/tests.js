@@ -15,42 +15,53 @@ describe('Recieve', function () {
         next.reset();
     });
     var config = { apikey: 'foo' };
-    it('should export a object', function () {
+    it('should export an object', function () {
         var ta = middleware(config, (err, rsp) => { });
         var actual = typeof ta;
         assert.equal(actual, 'object');
     });
 
-    it('should export an object with a receive function', function () {
+    it('should export an object with a botbuilder function', function () {
         var ta = middleware(config, (err, rsp) => { })
-        var actual = typeof ta.receive;
+        var actual = typeof ta.botbuilder;
         assert.equal(actual, 'function');
     });
 
 
-    it('should call next() if event is null', function () {
+    it('should call next() if session is null', function () {
         var ta = middleware(config, (err, rsp) => { });
-        ta.receive(null, next);
+        ta.botbuilder(null, next);
         assert(next.called);
     }
     );
 
-
-    it('should call next() if event.text is undefined', function () {
+    it('should call next() if session.message is undefined', function () {
         var ta = middleware(config, (err, rsp) => { });
-        var actual = ta.receive({}, next);
+        ta.botbuilder({}, next);
         assert(next.called);
     });
 
-    it('should call next() if event.text is null', function () {
+    it('should call next() if session.message is null', function () {
         var ta = middleware(config, (err, rsp) => { });
-        var actual = ta.receive({ text: null }, next);
+        ta.botbuilder({ message: null }, next);
+        assert(next.called);
+    })
+
+    it('should call next() if session.message.text is undefined', function () {
+        var ta = middleware(config, (err, rsp) => { });
+        var actual = ta.botbuilder({ message: {}}, next);
         assert(next.called);
     });
 
-    it('should call next() if event.text is entirely whitespace', function () {
+    it('should call next() if session.message.text is null', function () {
         var ta = middleware(config, (err, rsp) => { });
-        var actual = ta.receive({ text: '  ' }, next);
+        var actual = ta.botbuilder({message:{ text: null }}, next);
+        assert(next.called);
+    });
+
+    it('should call next() if session.message.text is entirely whitespace', function () {
+        var ta = middleware(config, (err, rsp) => { });
+        var actual = ta.botbuilder({ message: { text: '  ' } }, next);
         assert(next.called);
     });
 
@@ -59,8 +70,8 @@ describe('Recieve', function () {
         var receive = middleware(config, (err, rsp) => {
             assert.equal(err.message, 'Test Error');
             done();
-        }).receive;
-        receive({ text: 'Hello' }, () => { });
+        }).botbuilder;
+        receive({ message: { text: 'Hello' } }, () => { });
     });
 
     it('should pass along the response summary if no error occurs', function (done) {
@@ -68,7 +79,7 @@ describe('Recieve', function () {
         var receive = middleware(config, (err, rsp) => {
             assert.equal(rsp.sentiment, 1);
             done();
-        }).receive;
-        receive({  text: 'Hello' }, () => { });
+        }).botbuilder;
+        receive({ message: { text: 'Hello' } }, () => { });
     });
 })
